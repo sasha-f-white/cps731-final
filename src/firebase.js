@@ -52,12 +52,15 @@ export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
         if (!taskSnapshot.exists) {
             
             //REPLACE CONSTANTS WITH VARIABLES BROUGHT IN FROM DASHBOARD POST
+            const taskID = id
             const taskType = tType
             const taskName = tName
             const taskDesc = tDesc
             const taskTime = tTime
+    
             try {
                 taskRef.set({
+                    taskID,
                     taskType,
                     taskName,
                     taskDesc,
