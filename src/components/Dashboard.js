@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 //import { useCollectionData } from "react-firebase-hooks/firestore"
 //import { collection } from "@firebase/firestore"
 import { createUserTask } from '../firebase.js'
+import Fetch from './Fetch'
 
 export default function Dashboard() {
     
@@ -52,17 +53,24 @@ export default function Dashboard() {
         setLoading(false)
         e.target.reset()
     }
+/*
+    function displayTasks(){
+        const taskRef = firestore.doc(`users/${user.uid}/tasks`)
+        const taskSnapshot = taskRef.get()
 
 
+    }
+*/
 
 
 
 
     return (
         <>
-            <div>
-                Hello
-            </div>
+            <Card>
+                <Fetch></Fetch>
+
+            </Card>
             <Card>
                 <Card.Body>
 
@@ -102,18 +110,3 @@ export default function Dashboard() {
         </>
     )
 }
-/*
-                <Form onSubmit={handleAddTask}>
-                    <Form.Group id="TaskType">
-                        <Form.Label>Task Type</Form.Label>
-                        <Form.Control required />
-                    </Form.Group>
-                        <Form.Group id="TaskName">
-                        <Form.Label>Task Name</Form.Label>
-                        <Form.Control required />
-                    </Form.Group>
-                    <Button className="w-100" type="submit">
-                        Create Task
-                    </Button>
-                </Form>
-                    */
