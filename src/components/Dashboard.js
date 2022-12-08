@@ -6,16 +6,18 @@ import { Link, useNavigate } from 'react-router-dom'
 //import { useCollectionData } from "react-firebase-hooks/firestore"
 //import { collection } from "@firebase/firestore"
 import { createUserTask } from '../firebase.js'
-import Fetch from './Fetch'
+import firebase, { firestore } from "../firebase"
 
 export default function Dashboard() {
     
     const taskTypeRef = useRef()
     const taskNameRef = useRef()
     const taskDescRef = useRef()
+    const dataFetchedRef = useRef(false);
 
-    //this.state = {value: ''}
-    
+    const fetchRef = useRef()
+
+    const [allDocs, setAllDocs] = useState([])  
 
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
@@ -24,7 +26,12 @@ export default function Dashboard() {
 
 
 
-
+    useEffect(() => {
+        console.log('useEffect ran');
+        if (dataFetchedRef.current) return
+        dataFetchedRef.current = true
+        fetchAll()
+    }, [])
 
     async function handleLogout() {
         setError("")
@@ -52,14 +59,23 @@ export default function Dashboard() {
         setLoading(false)
         e.target.reset()
     }
-/*
-    function displayTasks(){
-        const taskRef = firestore.doc(`users/${user.uid}/tasks`)
-        const taskSnapshot = taskRef.get()
 
-
+    //Function to get all tasks from user's database 
+    function fetchAll(){
+        setAllDocs([])
+        firestore.collection(`users/${currentUser.uid}/tasks`)
+        .get()
+        .then((snapshot)=> {
+            if(snapshot.docs.length>0){
+                snapshot.docs.forEach((doc)=> {
+                    setAllDocs((prev) =>{
+                        return[...prev,doc.data()]
+                    })
+                })
+            }
+        })
+        console.log(allDocs)
     }
-*/
 
 
 
@@ -68,7 +84,27 @@ export default function Dashboard() {
         <>
             <Card>
                 
-                <Fetch></Fetch>
+                <div>
+                    <h1>Fetching Data</h1>
+                    <br></br>
+                    <div>
+                        {allDocs.map((doc)=>{
+                            return(
+                                <Card>
+                                <br></br>
+                                <div>
+                                    <h1>{doc.taskType}</h1>
+                                    <h1>{doc.taskName}</h1>
+                                    <h1>{doc.taskDesc}</h1>
+                                </div>
+                                <br></br>
+                                </Card>
+                            )
+                        })}
+                    </div>
+
+                    <button onClick={fetchAll}>Fetch All Tasks</button>
+                </div>
 
             </Card>
             <Card>
@@ -94,7 +130,7 @@ export default function Dashboard() {
                             Create Task
                         </Button>
                     </Form>
-                    <button onClick={Fetch.fetchAll}>
+                    <button onClick={fetchAll}>
                             Fetch All Test
                     </button>
                 </Card.Body>
