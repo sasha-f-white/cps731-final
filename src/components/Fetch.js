@@ -1,18 +1,25 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import firebase, { firestore } from "../firebase"
 import { useAuth } from '../contexts/AuthContext'
 import { Card, Button, Alert, Form } from 'react-bootstrap'
 
 export default function Fetch() {
 
-
     const [allDocs, setAllDocs] = useState([])
     const { currentUser } = useAuth()
+    const dataFetchedRef = useRef(false);
+
+    useEffect(() => {
+        console.log('useEffect ran');
+        if (dataFetchedRef.current) return
+        dataFetchedRef.current = true
+        fetchAll()
+    }, [])
 
     //const [singleDoc, setSingleDoc]=useState({})
 
-    function fetchAll(e){
-        e.preventDefault()
+    function fetchAll(){
+        //e.preventDefault()
 
         setAllDocs([])
 

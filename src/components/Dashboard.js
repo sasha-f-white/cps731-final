@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Card, Button, Alert, Form } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
@@ -21,7 +21,6 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(false)
     const { currentUser, logout } = useAuth()
     const navigation = useNavigate()
-
 
 
 
@@ -68,6 +67,7 @@ export default function Dashboard() {
     return (
         <>
             <Card>
+                
                 <Fetch></Fetch>
 
             </Card>
@@ -94,6 +94,9 @@ export default function Dashboard() {
                             Create Task
                         </Button>
                     </Form>
+                    <button onClick={Fetch.fetchAll}>
+                            Fetch All Test
+                    </button>
                 </Card.Body>
             </Card>
             <br></br>

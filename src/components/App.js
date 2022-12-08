@@ -19,7 +19,7 @@ function App() {
         <Router>
           <AuthProvider>
             <Routes>
-              <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>}></Route>
+              <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} onEnter={() => console.log('Entered /')}></Route>
               <Route path="/signup" element={<Signup></Signup>} />
               <Route path="/login" element={<Login></Login>} />
             </Routes>
