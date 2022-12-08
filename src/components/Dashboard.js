@@ -25,7 +25,7 @@ export default function Dashboard() {
     const navigation = useNavigate()
 
 
-
+    //Loads the task list ONCE
     useEffect(() => {
         console.log('useEffect ran');
         if (dataFetchedRef.current) return
@@ -44,6 +44,7 @@ export default function Dashboard() {
         }
     }
 
+    //Adds a task to the database
     async function handleAddTask(e) {
         e.preventDefault()
 
@@ -52,6 +53,8 @@ export default function Dashboard() {
             setLoading(true)
             await createUserTask(currentUser, taskTypeRef.current.value, taskNameRef.current.value, taskDescRef.current.value)
             navigation("/")
+            //Should update task list by calling fetchAll again
+            fetchAll()
         } catch {
             setError("Failed to Add Task")
         }
@@ -79,7 +82,7 @@ export default function Dashboard() {
 
 
 
-
+    //HTML CODE TO BE CHANGED WITH CSS/BOOTSTRAP
     return (
         <>
             <Card>
