@@ -80,6 +80,12 @@ export default function Dashboard() {
         console.log(allDocs)
     }
 
+    function deleteTask(taskUID){
+        console.log(taskUID)
+        firestore.collection(`users/${currentUser.uid}/tasks`).doc(`${taskUID}`).delete()
+        fetchAll()
+    }
+
 
 
     //HTML CODE TO BE CHANGED WITH CSS/BOOTSTRAP
@@ -96,11 +102,14 @@ export default function Dashboard() {
                                 <Card>
                                 <br></br>
                                 <div>
+                                    {console.log(doc.taskID)}
+                                    <h1>{doc.taskID}</h1>
                                     <h1>{doc.taskType}</h1>
                                     <h1>{doc.taskName}</h1>
                                     <h1>{doc.taskDesc}</h1>
                                 </div>
                                 <br></br>
+                                <Button variant="danger" onClick={() => {deleteTask(doc.taskID)}}>Delete Task</Button>
                                 </Card>
                             )
                         })}
@@ -133,7 +142,7 @@ export default function Dashboard() {
                             Create Task
                         </Button>
                     </Form>
-                    <button onClick={fetchAll}>
+                    <button>
                             Fetch All Test
                     </button>
                 </Card.Body>
