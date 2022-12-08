@@ -133,9 +133,6 @@ export default function Dashboard() {
                             Create Task
                         </Button>
                     </Form>
-                    <button>
-                            Fetch All Test
-                    </button>
                 </Card.Body>
             </Card>
             <Card>
