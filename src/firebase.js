@@ -41,7 +41,7 @@ export const createUserDocument = async (user) => {
 }
 
 //For adding a task when a user wants to add a task
-export const createUserTask = async (user, tType, tName, tDesc) => {
+export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
     if (!user) return;
     console.log(user, tType)
     //SOME RANDOMLY GENERATED ID
@@ -55,11 +55,13 @@ export const createUserTask = async (user, tType, tName, tDesc) => {
             const taskType = tType
             const taskName = tName
             const taskDesc = tDesc
+            const taskTime = tTime
             try {
                 taskRef.set({
                     taskType,
                     taskName,
                     taskDesc,
+                    taskTime,
                 })
                 
             } catch(error) {

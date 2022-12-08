@@ -13,6 +13,7 @@ export default function Dashboard() {
     const taskTypeRef = useRef()
     const taskNameRef = useRef()
     const taskDescRef = useRef()
+    const taskTimeRef = useRef()
     const dataFetchedRef = useRef(false);
 
     const fetchRef = useRef()
@@ -51,7 +52,7 @@ export default function Dashboard() {
         try {
             setError("")
             setLoading(true)
-            await createUserTask(currentUser, taskTypeRef.current.value, taskNameRef.current.value, taskDescRef.current.value)
+            await createUserTask(currentUser, taskTypeRef.current.value, taskNameRef.current.value, taskDescRef.current.value, taskTimeRef.current.value)
             navigation("/")
             //Should update task list by calling fetchAll again
             fetchAll()
@@ -84,32 +85,23 @@ export default function Dashboard() {
 
     //HTML CODE TO BE CHANGED WITH CSS/BOOTSTRAP
     return (
-        <>
+            <html>
+            <head>
+            <title>Group 6 CPS final</title>
+            </head>
+            <body>
+            {/* profile */}
             <Card>
-                
-                <div>
-                    <h1>Fetching Data</h1>
-                    <br></br>
-                    <div>
-                        {allDocs.map((doc)=>{
-                            return(
-                                <Card>
-                                <br></br>
-                                <div>
-                                    <h1>{doc.taskType}</h1>
-                                    <h1>{doc.taskName}</h1>
-                                    <h1>{doc.taskDesc}</h1>
-                                </div>
-                                <br></br>
-                                </Card>
-                            )
-                        })}
-                    </div>
-
-                    <button onClick={fetchAll}>Fetch All Tasks</button>
-                </div>
-
+                <Card.Body>
+                    <h2 >Profile</h2>
+                    {error && <Alert variant="danger">{error}</Alert>}
+                    <strong>Email: </strong> {currentUser.email}
+                </Card.Body>
             </Card>
+            <div>
+                <Button variant="link" onClick={handleLogout}>Log Out</Button>
+            </div>
+            {/* add task form */}
             <Card>
                 <Card.Body>
 
@@ -128,7 +120,9 @@ export default function Dashboard() {
                             <Form.Label>Task Description</Form.Label>
                             <Form.Control ref={taskDescRef} required />
                         </Form.Group>
-                        
+                        <label for="Task Date">Date and Time:</label><br></br>
+                        <input type="datetime-local" id="taskDate" ref={taskTimeRef}></input>
+                        <br></br>
                         <Button disabled={loading} className="w-100" type="submit">
                             Create Task
                         </Button>
@@ -138,17 +132,34 @@ export default function Dashboard() {
                     </button>
                 </Card.Body>
             </Card>
-            <br></br>
             <Card>
-                <Card.Body>
-                    <h2 className="text-center mb-4">Profile</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    <strong>Email: </strong> {currentUser.email}
-                </Card.Body>
+            {/* display tasks */}
+                
+                <div>
+                    <h1>Fetching Data</h1>
+                    <br></br>
+                    <div>
+                        {allDocs.map((doc)=>{
+                            return(
+                                <Card>
+                                <br></br>
+                                <div>
+                                    <h1>{doc.taskType}</h1>
+                                    <h1>{doc.taskName}</h1>
+                                    <h1>{doc.taskDesc}</h1>
+                                    <h1>{doc.taskTime}</h1>
+                                </div>
+                                <br></br>
+                                </Card>
+                            )
+                        })}
+                    </div>
+
+                    <button onClick={fetchAll}>Fetch All Tasks</button>
+                </div>
+
             </Card>
-            <div className="w-100 text-center mt-2">
-                <Button variant="link" onClick={handleLogout}>Log Out</Button>
-            </div>
-        </>
+            </body>
+        </html>
     )
 }
