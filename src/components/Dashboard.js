@@ -153,6 +153,7 @@ export default function Dashboard() {
                                     <h1>{doc.taskTime}</h1>
                                 </div>
                                 <br></br>
+                                <Button variant="danger" onClick={() => {deleteTask(doc.taskID)}}>Delete Task</Button>
                                 </Card>
                             )
                         })}
