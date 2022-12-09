@@ -115,8 +115,11 @@ export default function Dashboard() {
             <div>
                 <CardGroup>
                     {/* add task form */}
+                    
                     <Card>
+                    
                         <Card.Body>
+                        <h1>Create a task here</h1>
                             <Form onSubmit={handleAddTask}>
                                 <Form.Select id="TaskType" ref={taskTypeRef}>
                                     <option value = "Recurring">Recurring Task</option>
@@ -134,7 +137,7 @@ export default function Dashboard() {
                                 </Form.Group>
                                 <label for="Task Date">Date and Time:</label><br></br>
                                 <input type="datetime-local" id="taskDate" ref={taskTimeRef}></input>
-                                <br></br>
+                                <br></br><br></br>
                                 <Button disabled={loading} className="w-100" type="submit">
                                     Create Task
                                 </Button>
@@ -146,19 +149,21 @@ export default function Dashboard() {
                     {/* display tasks */}
                         
                         <div>
-                            <h1>Fetching Data</h1>
-                            <br></br>
+                            <Card>
+                                <Card.Body>
+                                    <h1>Task List</h1>
+                                </Card.Body>
+                            </Card>
                             <div>
                                 {allDocs.map((doc)=>{
                                     return(
-                                        <Card>
+                                        <Card style={{ maxHeight: "300px" }}>
                                             <Card.Body>
-                                                <br></br>
                                                 <div>
-                                                    <h1>{doc.taskType}</h1>
-                                                    <h4>{doc.taskName}</h4>
-                                                    <h4>{doc.taskDesc}</h4>
-                                                    <h4>{doc.taskTime}</h4>
+                                                    <h2>{doc.taskName}</h2>
+                                                    <p>{doc.taskDesc}</p>
+                                                    <p>{doc.taskTime}</p>
+                                                    <p>{doc.taskType} Task</p>
                                                 </div>
                                                 <br></br>
                                                 <Button variant="danger" onClick={() => {deleteTask(doc.taskID)}}>Delete Task</Button>
@@ -168,7 +173,7 @@ export default function Dashboard() {
                                 })}
                             </div>
 
-                            <button onClick={fetchAll}>Fetch All Tasks</button>
+                            
                         </div>
 
                     </Card>
@@ -177,3 +182,5 @@ export default function Dashboard() {
             </>
     )
 }
+
+//<button onClick={fetchAll}>Fetch All Tasks</button>
