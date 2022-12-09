@@ -97,7 +97,7 @@ export default function Dashboard() {
             {/* profile */}
             <div>
                 <Card style={{ width: '100' }}>
-                    <Card.Body style="background-color:floralwhite" >
+                    <Card.Body>
                         <h2 >Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <strong>Email: </strong> {currentUser.email}
