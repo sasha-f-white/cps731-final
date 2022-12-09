@@ -96,7 +96,7 @@ export default function Dashboard() {
             <title>Group 6 CPS final</title>
             {/* profile */}
             <div>
-                <Card style={{ width: '100' , color: 'antiquewhite' }}>
+                <Card style={{ width: '100' , background: 'antiquewhite' }}>
                     <Card.Body >
                         <h2 >Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
@@ -115,7 +115,8 @@ export default function Dashboard() {
             <div>
                 <CardGroup>
                     {/* add task form */}
-                    <Card style={{ color: 'floralwhite' }}>
+                    <Card style={{ background: 'floralwhite' }}>
+                    <Card><Card.Body><h1>Add a Task</h1></Card.Body></Card>
                         <Card.Body>
                             <Form onSubmit={handleAddTask}>
                                 <Form.Select id="TaskType" ref={taskTypeRef}>
@@ -134,7 +135,7 @@ export default function Dashboard() {
                                 </Form.Group>
                                 <label for="Task Date">Date and Time:</label><br></br>
                                 <input type="datetime-local" id="taskDate" ref={taskTimeRef}></input>
-                                <br></br>
+                                <br></br><br></br>
                                 <Button disabled={loading} className="w-100" type="submit">
                                     Create Task
                                 </Button>
@@ -146,12 +147,12 @@ export default function Dashboard() {
                     {/* display tasks */}
                         
                         <div>
-                            <h1>Fetching Data</h1>
-                            <br></br>
+                            <Card><Card.Body><h1>Task List</h1></Card.Body></Card>
+                            
                             <div>
                                 {allDocs.map((doc)=>{
                                     return(
-                                        <Card style={{ color: 'floralwhite'}}>
+                                        <Card style={{ background: 'floralwhite'}}>
                                             <Card.Body>
                                                 <br></br>
                                                 <div>
@@ -168,7 +169,7 @@ export default function Dashboard() {
                                 })}
                             </div>
 
-                            <button onClick={fetchAll}>Fetch All Tasks</button>
+
                         </div>
 
                     </Card>
