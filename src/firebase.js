@@ -85,7 +85,7 @@ export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
     
             try {
                 if (taskType === "Deadline"){
-                    createUserTask(user,"Recurring", "Preparing for: ".concat(taskName), "Reminder to get ready for ".concat(taskName), "")
+                    createUserTask(user,"Recurring", "Preparing for: ".concat(taskName), "Reminder to get ready for ".concat(taskDesc), "")
                 }
                 taskRef.set({
                     taskID,
