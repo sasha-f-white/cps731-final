@@ -97,15 +97,26 @@ export default function Dashboard() {
             {/* profile */}
             <div>
                 <Card style={{ width: '100' }}>
+<<<<<<< Updated upstream
                     <Card.Body>
+=======
+                    <Card.Body >
+>>>>>>> Stashed changes
                         <h2 >Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <strong>Email: </strong> {currentUser.email}
                         <div>
+<<<<<<< Updated upstream
                             <Button variant="link" onClick={handleLogout}><b>Log Out</b></Button>
                         </div>
                         <div>
                             <Link to="/update-profile"><b>Update Profile</b></Link>
+=======
+                            <Button variant="link"  onClick={handleLogout}><b>Log Out</b></Button>
+                        </div>
+                        <div>
+                            <Link  to="/update-profile"><b>Update Profile</b></Link>
+>>>>>>> Stashed changes
                         </div>
                     </Card.Body>
                     
