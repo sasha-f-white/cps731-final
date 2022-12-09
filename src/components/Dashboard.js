@@ -97,15 +97,15 @@ export default function Dashboard() {
             {/* profile */}
             <div>
                 <Card style={{ width: '100' }}>
-                    <Card.Body style="background-color:floralwhite" >
+                    <Card.Body style="background-color:antiquewhite" >
                         <h2 >Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <strong>Email: </strong> {currentUser.email}
                         <div>
-                            <Button variant="link" onClick={handleLogout}><b>Log Out</b></Button>
+                            <Button variant="link" style="text-decoration: none; color:black" onClick={handleLogout}><b>Log Out</b></Button>
                         </div>
                         <div>
-                            <Link to="/update-profile"><b>Update Profile</b></Link>
+                            <Link style="text-decoration: none; color:black" to="/update-profile"><b>Update Profile</b></Link>
                         </div>
                     </Card.Body>
                     
@@ -116,7 +116,7 @@ export default function Dashboard() {
                 <CardGroup>
                     {/* add task form */}
                     <Card>
-                        <Card.Body>
+                        <Card.Body style="background-color:floralwhite">
                             <Form onSubmit={handleAddTask}>
                                 <Form.Select id="TaskType" ref={taskTypeRef}>
                                     <option value = "Recurring">Recurring Task</option>
