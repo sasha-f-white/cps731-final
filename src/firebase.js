@@ -1,7 +1,12 @@
 //test
+
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import 'firebase/compat/firestore'
+
+
+// const nodemailer = require('nodemailer');
+
 
 const app = firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -16,6 +21,26 @@ const app = firebase.initializeApp({
 export const auth = app.auth()
 export const firestore = firebase.firestore()
 
+export const getEmails = async () => {
+    const userRef = firestore.collection('users');
+    const users = await userRef.get();
+    users.forEach(doc =>{
+        var email = doc.get('email');
+        console.log(doc.id, '=>', email);
+        getTaskInfo(doc.id)
+    })
+}
+
+export const getTaskInfo = async (userId) =>{
+    const taskRef = firestore.collection(`users/${userId}/tasks/`)
+    const tasks = await taskRef.get()
+    tasks.forEach(task =>{
+        var name = task.get('taskName')
+        var desc = task.get('taskDesc')
+        var time = task.get('taskTime')
+        console.log(name, "=>", desc, "=>", time)
+    })
+}
 //For adding a user to the firestore after an account is created
 export const createUserDocument = async (user) => {
     if (!user) return;
@@ -59,6 +84,9 @@ export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
             const taskTime = tTime
     
             try {
+                if (taskType === "Deadline"){
+                    createUserTask(user,"Recurring", "Preparing for: ".concat(taskName), "Reminder to get ready for ".concat(taskName), "")
+                }
                 taskRef.set({
                     taskID,
                     taskType,
