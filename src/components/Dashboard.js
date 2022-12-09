@@ -90,22 +90,22 @@ export default function Dashboard() {
 
 
 
-    //HTML CODE TO BE CHANGED WITH CSS/BOOTSTRAP
+       //HTML CODE TO BE CHANGED WITH CSS/BOOTSTRAP
     return (
             <>
             <title>Group 6 CPS final</title>
             {/* profile */}
             <div>
                 <Card style={{ width: '100' }}>
-                    <Card.Body>
+                    <Card.Body style="background-color:floralwhite" >
                         <h2 >Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <strong>Email: </strong> {currentUser.email}
                         <div>
-                            <Button variant="link" onClick={handleLogout}>Log Out</Button>
+                            <Button variant="link" onClick={handleLogout}><b>Log Out</b></Button>
                         </div>
                         <div>
-                            <Link to="/update-profile">Update Profile</Link>
+                            <Link to="/update-profile"><b>Update Profile</b></Link>
                         </div>
                     </Card.Body>
                     
@@ -115,11 +115,8 @@ export default function Dashboard() {
             <div>
                 <CardGroup>
                     {/* add task form */}
-                    
                     <Card>
-                    
                         <Card.Body>
-                        <h1>Create a task here</h1>
                             <Form onSubmit={handleAddTask}>
                                 <Form.Select id="TaskType" ref={taskTypeRef}>
                                     <option value = "Recurring">Recurring Task</option>
@@ -137,7 +134,7 @@ export default function Dashboard() {
                                 </Form.Group>
                                 <label for="Task Date">Date and Time:</label><br></br>
                                 <input type="datetime-local" id="taskDate" ref={taskTimeRef}></input>
-                                <br></br><br></br>
+                                <br></br>
                                 <Button disabled={loading} className="w-100" type="submit">
                                     Create Task
                                 </Button>
@@ -149,21 +146,19 @@ export default function Dashboard() {
                     {/* display tasks */}
                         
                         <div>
-                            <Card>
-                                <Card.Body>
-                                    <h1>Task List</h1>
-                                </Card.Body>
-                            </Card>
+                            <h1>Fetching Data</h1>
+                            <br></br>
                             <div>
                                 {allDocs.map((doc)=>{
                                     return(
-                                        <Card style={{ maxHeight: "300px" }}>
+                                        <Card>
                                             <Card.Body>
+                                                <br></br>
                                                 <div>
-                                                    <h2>{doc.taskName}</h2>
-                                                    <p>{doc.taskDesc}</p>
-                                                    <p>{doc.taskTime}</p>
-                                                    <p>{doc.taskType} Task</p>
+                                                    <h1>{doc.taskType}</h1>
+                                                    <h4>{doc.taskName}</h4>
+                                                    <h4>{doc.taskDesc}</h4>
+                                                    <h4>{doc.taskTime}</h4>
                                                 </div>
                                                 <br></br>
                                                 <Button variant="danger" onClick={() => {deleteTask(doc.taskID)}}>Delete Task</Button>
@@ -173,7 +168,7 @@ export default function Dashboard() {
                                 })}
                             </div>
 
-                            
+                            <button onClick={fetchAll}>Fetch All Tasks</button>
                         </div>
 
                     </Card>
