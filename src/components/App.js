@@ -8,10 +8,12 @@ import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
+import './home.css';
 
 function App() {
   return (
     <>
+    <body className="bg">
         <Router>
           <AuthProvider>
             <Routes>
@@ -23,6 +25,7 @@ function App() {
             </Routes>
           </AuthProvider>
         </Router>
+        </body>
     </>
   )
 }

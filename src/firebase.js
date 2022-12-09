@@ -66,6 +66,7 @@ export const createUserDocument = async (user) => {
 }
 
 //For adding a task when a user wants to add a task
+//CONTROLLER 
 export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
     if (!user) return;
     console.log(user, tType)
@@ -81,12 +82,11 @@ export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
             const taskType = tType
             const taskName = tName
             const taskDesc = tDesc
-            const taskTime = tTime
-    
+            const taskTime = tTime 
+
+            //UPDATE THE MODEL/DATABASE
             try {
-                if (taskType === "Deadline"){
-                    createUserTask(user,"Recurring", "Preparing for: ".concat(taskName), "Reminder to get ready for ".concat(taskDesc), "")
-                }
+
                 taskRef.set({
                     taskID,
                     taskType,

@@ -47,12 +47,14 @@ export default function Dashboard() {
     }
 
     //Adds a task to the database
+    //UPDATE THE MODEL WITH THIS FUNCTION
     async function handleAddTask(e) {
         e.preventDefault()
 
         try {
             setError("")
             setLoading(true)
+            //GOES TO FIREBASE.JS AKA CONTROLLER
             await createUserTask(currentUser, taskTypeRef.current.value, taskNameRef.current.value, taskDescRef.current.value, taskTimeRef.current.value)
             navigation("/")
             //Should update task list by calling fetchAll again
@@ -64,6 +66,7 @@ export default function Dashboard() {
         setLoading(false)
         e.target.reset()
     }
+
 
     //Function to get all tasks from user's database 
     function fetchAll(){
@@ -116,7 +119,7 @@ export default function Dashboard() {
                 <CardGroup>
                     {/* add task form */}
                     <Card style={{ background: 'floralwhite' }}>
-                    <Card><Card.Body><h1>Add a Task</h1></Card.Body></Card>
+                    <Card style={{ background: '#fba92c'}}><Card.Body><h1>Add a Task</h1></Card.Body></Card>
                         <Card.Body>
                             <Form onSubmit={handleAddTask}>
                                 <Form.Select id="TaskType" ref={taskTypeRef}>
@@ -147,7 +150,7 @@ export default function Dashboard() {
                     {/* display tasks */}
                         
                         <div>
-                            <Card><Card.Body><h1>Task List</h1></Card.Body></Card>
+                            <Card style={{ background: '#fba92c'}}><Card.Body><h1>Task List</h1></Card.Body></Card>
                             
                             <div>
                                 {allDocs.map((doc)=>{
@@ -156,10 +159,10 @@ export default function Dashboard() {
                                             <Card.Body>
                                                 <br></br>
                                                 <div>
-                                                    <h1>{doc.taskType}</h1>
-                                                    <h4>{doc.taskName}</h4>
+                                                    <h1>{doc.taskName}</h1>
                                                     <h4>{doc.taskDesc}</h4>
                                                     <h4>{doc.taskTime}</h4>
+                                                    <p>Task type: {doc.taskType}</p>
                                                 </div>
                                                 <br></br>
                                                 <Button variant="danger" onClick={() => {deleteTask(doc.taskID)}}>Delete Task</Button>

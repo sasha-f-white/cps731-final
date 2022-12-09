@@ -71,7 +71,7 @@ export default function UpdateProfile() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} placeholder="Leave blank to keep unchanged"/>
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="w-100" type="submit" style={{color: 'white'}}>
               Update!
             </Button>
           </Form>
