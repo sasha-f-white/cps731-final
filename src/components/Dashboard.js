@@ -96,7 +96,7 @@ export default function Dashboard() {
             <title>Group 6 CPS final</title>
             {/* profile */}
             <div>
-                <Card style={{ width: '100' , color: 'antiquewhite' }}>
+                <Card style={{ width: '100' , background-color: 'antiquewhite' }}>
                     <Card.Body >
                         <h2 >Profile</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
@@ -115,7 +115,7 @@ export default function Dashboard() {
             <div>
                 <CardGroup>
                     {/* add task form */}
-                    <Card style={{ color: 'floralwhite' }}>
+                    <Card style={{ background-color: 'antiquewhite' }}>
                         <Card.Body>
                             <Form onSubmit={handleAddTask}>
                                 <Form.Select id="TaskType" ref={taskTypeRef}>
@@ -151,7 +151,7 @@ export default function Dashboard() {
                             <div>
                                 {allDocs.map((doc)=>{
                                     return(
-                                        <Card style={{ color: 'floralwhite'}}>
+                                        <Card style={{ background-color: 'antiquewhite'}}>
                                             <Card.Body>
                                                 <br></br>
                                                 <div>
