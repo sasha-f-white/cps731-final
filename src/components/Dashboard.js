@@ -102,10 +102,13 @@ export default function Dashboard() {
                     <h2 >Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <strong>Email: </strong> {currentUser.email}
+                    <div>
+                        <Button variant="link" onClick={handleLogout}>Log Out</Button>
+                    </div>
                 </Card.Body>
             </Card>
             <div>
-                <Button variant="link" onClick={handleLogout}>Log Out</Button>
+                <Link to="/update-profile">Update Profile</Link>
             </div>
             {/* add task form */}
             <Card>

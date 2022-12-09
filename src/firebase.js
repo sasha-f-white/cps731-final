@@ -77,11 +77,24 @@ export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
         }
     }
 }
-/*
-export function DisplayTasks(){
-    return(
 
-    )
+export const UpdateUserDocument = async (user, newEmail) => {
+    if (!user) return;
+    
+    const userRef = firestore.doc(`users/${user.uid}`)
+    console.log(user)
+    const snapshot = await userRef.get()
+
+    if (snapshot.exists) {
+        try {
+            userRef.set({
+                newEmail,
+                createdAt: new Date()
+            })
+        } catch(error) {
+            console.log('Error in creating user', error)
+        }
+    }
 }
-*/
+
 export default app

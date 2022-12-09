@@ -7,8 +7,7 @@ import Dashboard from "./Dashboard"
 import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
-//import ForgotPassword from "./ForgotPassword"
-//import UpdateProfile from "./UpdateProfile"
+import UpdateProfile from "./UpdateProfile"
 
 function App() {
   return (
@@ -21,6 +20,7 @@ function App() {
           <AuthProvider>
             <Routes>
               <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>}></Route>
+              <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>}></Route>
               <Route path="/signup" element={<Signup></Signup>} />
               <Route path="/login" element={<Login></Login>} />
               <Route path="/forgot-password" element={<ForgotPassword></ForgotPassword>}></Route>
