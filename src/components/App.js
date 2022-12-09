@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Dashboard from "./Dashboard"
 import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
+import ForgotPassword from "./ForgotPassword"
 //import ForgotPassword from "./ForgotPassword"
 //import UpdateProfile from "./UpdateProfile"
 
@@ -19,9 +20,10 @@ function App() {
         <Router>
           <AuthProvider>
             <Routes>
-              <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} onEnter={() => console.log('Entered /')}></Route>
+              <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>}></Route>
               <Route path="/signup" element={<Signup></Signup>} />
               <Route path="/login" element={<Login></Login>} />
+              <Route path="/forgot-password" element={<ForgotPassword></ForgotPassword>}></Route>
             </Routes>
           </AuthProvider>
         </Router>
