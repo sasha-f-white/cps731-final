@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import { createUserDocument } from '../firebase.js'
+import { createUserDocument, updateUserDocument } from '../firebase.js'
 
 export default function UpdateProfile() {
   const emailRef = useRef()
@@ -42,7 +42,7 @@ export default function UpdateProfile() {
     try {
       setError("")
       setLoading(true)
-      await createUserDocument(currentUser)
+      await updateUserDocument(currentUser, emailRef.current.value)
       navigation("/")
     } catch {
       setError("Failed to create an account")

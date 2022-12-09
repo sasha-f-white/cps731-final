@@ -106,17 +106,18 @@ export const createUserTask = async (user, tType, tName, tDesc, tTime) => {
     }
 }
 
-export const UpdateUserDocument = async (user, newEmail) => {
+export const updateUserDocument = async (user, newEmail) => {
     if (!user) return;
     
     const userRef = firestore.doc(`users/${user.uid}`)
+    const email = newEmail
     console.log(user)
     const snapshot = await userRef.get()
 
     if (snapshot.exists) {
         try {
             userRef.set({
-                newEmail,
+                email,
                 createdAt: new Date()
             })
         } catch(error) {
