@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Card, Button, Alert, Form } from 'react-bootstrap'
+import CardGroup from 'react-bootstrap/CardGroup';
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 //import { firestore } from '../firebase'
@@ -91,82 +92,88 @@ export default function Dashboard() {
 
     //HTML CODE TO BE CHANGED WITH CSS/BOOTSTRAP
     return (
-            <html>
-            <head>
+            <>
             <title>Group 6 CPS final</title>
-            </head>
-            <body>
             {/* profile */}
-            <Card>
-                <Card.Body>
-                    <h2 >Profile</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    <strong>Email: </strong> {currentUser.email}
-                    <div>
-                        <Button variant="link" onClick={handleLogout}>Log Out</Button>
-                    </div>
-                </Card.Body>
-            </Card>
             <div>
-                <Link to="/update-profile">Update Profile</Link>
+                <Card style={{ width: '100' }}>
+                    <Card.Body>
+                        <h2 >Profile</h2>
+                        {error && <Alert variant="danger">{error}</Alert>}
+                        <strong>Email: </strong> {currentUser.email}
+                        <div>
+                            <Button variant="link" onClick={handleLogout}>Log Out</Button>
+                        </div>
+                        <div>
+                            <Link to="/update-profile">Update Profile</Link>
+                        </div>
+                    </Card.Body>
+                    
+                </Card>
             </div>
-            {/* add task form */}
-            <Card>
-                <Card.Body>
 
-                    <Form onSubmit={handleAddTask}>
-                        <Form.Select id="TaskType" ref={taskTypeRef}>
-                            <option value = "Recurring">Recurring Task</option>
-                            <option value = "One Time">One Time Task</option>
-                            <option value = "Deadline">Deadline Task</option>
+            <div>
+                <CardGroup>
+                    {/* add task form */}
+                    <Card>
+                        <Card.Body>
+                            <Form onSubmit={handleAddTask}>
+                                <Form.Select id="TaskType" ref={taskTypeRef}>
+                                    <option value = "Recurring">Recurring Task</option>
+                                    <option value = "One Time">One Time Task</option>
+                                    <option value = "Deadline">Deadline Task</option>
 
-                        </Form.Select>
-                        <Form.Group id="TaskName">
-                            <Form.Label>Task Name</Form.Label>
-                            <Form.Control ref={taskNameRef} required />
-                        </Form.Group>
-                        <Form.Group id="TaskDesc">
-                            <Form.Label>Task Description</Form.Label>
-                            <Form.Control ref={taskDescRef} required />
-                        </Form.Group>
-                        <label for="Task Date">Date and Time:</label><br></br>
-                        <input type="datetime-local" id="taskDate" ref={taskTimeRef}></input>
-                        <br></br>
-                        <Button disabled={loading} className="w-100" type="submit">
-                            Create Task
-                        </Button>
-                    </Form>
-                </Card.Body>
-            </Card>
-            <Card>
-            {/* display tasks */}
-                
-                <div>
-                    <h1>Fetching Data</h1>
-                    <br></br>
-                    <div>
-                        {allDocs.map((doc)=>{
-                            return(
-                                <Card>
+                                </Form.Select>
+                                <Form.Group id="TaskName">
+                                    <Form.Label>Task Name</Form.Label>
+                                    <Form.Control ref={taskNameRef} required />
+                                </Form.Group>
+                                <Form.Group id="TaskDesc">
+                                    <Form.Label>Task Description</Form.Label>
+                                    <Form.Control ref={taskDescRef} required />
+                                </Form.Group>
+                                <label for="Task Date">Date and Time:</label><br></br>
+                                <input type="datetime-local" id="taskDate" ref={taskTimeRef}></input>
                                 <br></br>
-                                <div>
-                                    <h1>{doc.taskType}</h1>
-                                    <h1>{doc.taskName}</h1>
-                                    <h1>{doc.taskDesc}</h1>
-                                    <h1>{doc.taskTime}</h1>
-                                </div>
-                                <br></br>
-                                <Button variant="danger" onClick={() => {deleteTask(doc.taskID)}}>Delete Task</Button>
-                                </Card>
-                            )
-                        })}
-                    </div>
+                                <Button disabled={loading} className="w-100" type="submit">
+                                    Create Task
+                                </Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
 
-                    <button onClick={fetchAll}>Fetch All Tasks</button>
-                </div>
+                    <Card>
+                    {/* display tasks */}
+                        
+                        <div>
+                            <h1>Fetching Data</h1>
+                            <br></br>
+                            <div>
+                                {allDocs.map((doc)=>{
+                                    return(
+                                        <Card>
+                                            <Card.Body>
+                                                <br></br>
+                                                <div>
+                                                    <h1>{doc.taskType}</h1>
+                                                    <h4>{doc.taskName}</h4>
+                                                    <h4>{doc.taskDesc}</h4>
+                                                    <h4>{doc.taskTime}</h4>
+                                                </div>
+                                                <br></br>
+                                                <Button variant="danger" onClick={() => {deleteTask(doc.taskID)}}>Delete Task</Button>
+                                            </Card.Body>
+                                        </Card>
+                                    )
+                                })}
+                            </div>
 
-            </Card>
-            </body>
-        </html>
+                            <button onClick={fetchAll}>Fetch All Tasks</button>
+                        </div>
+
+                    </Card>
+                </CardGroup>
+            </div>
+            </>
     )
 }
